@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AxiomIconComponent } from './axiom-icon/axiom-icon.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AxiomIconComponent
   ],
   imports: [
     BrowserModule,
