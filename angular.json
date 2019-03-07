@@ -134,6 +134,41 @@
           }
         }
       }
+    },
+    "ax-icon": {
+      "root": "projects/ax-icon",
+      "sourceRoot": "projects/ax-icon/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ax-icon/tsconfig.lib.json",
+            "project": "projects/ax-icon/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ax-icon/src/test.ts",
+            "tsConfig": "projects/ax-icon/tsconfig.spec.json",
+            "karmaConfig": "projects/ax-icon/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ax-icon/tsconfig.lib.json",
+              "projects/ax-icon/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "axiom-icon"

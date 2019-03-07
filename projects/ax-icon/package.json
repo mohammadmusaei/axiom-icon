@@ -1,0 +1,27 @@
+{
+  "name": "axiom-icon",
+  "version": "1.0.0",
+  "description": "Angular icon component",
+  "author": "Mohammad Musaei",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mohammadmusaei/axiom-icon"
+  },
+  "keywords": [
+    "angular",
+    "icon",
+    "component",
+    "angular-icon",
+    "ngx-icon",
+    "typescript",
+    "javascript",
+    "axiom",
+    "svg"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0"
+  }
+}
+

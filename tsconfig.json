@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ax-icon": [
+        "dist/ax-icon"
+      ],
+      "ax-icon/*": [
+        "dist/ax-icon/*"
+      ]
+    }
   }
 }

@@ -237,6 +237,11 @@ export type AxiomIconLinejoin = 'arcs' | 'round' | 'bevel';
   styleUrls: ['./axiom-icon.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  host:{
+    'class' : 'ax-icon',
+    '[style.height.px]' : 'size',
+    '[style.width.px]' : 'size'
+  }
 })
 export class AxiomIconComponent implements OnInit, OnDestroy {
 
@@ -272,26 +277,25 @@ export class AxiomIconComponent implements OnInit, OnDestroy {
 
   private checkSmartColor(): void {
     if (this.smartColor && this.parent) {
-      let dark: boolean;
-      dark = this.checkParentColor(this.parent);
-      if (dark && this.isDark(this.stroke)) {
+      const brightnessFactor = 123;
+      let brightness = this.checkParentColor(this.parent);
+      if (brightness < brightnessFactor && this.brightness(this.stroke) < brightnessFactor) {
         this.stroke = 'rgb(255,255,255)';
         this._change.detectChanges();
       }
-      else if (!dark && !this.isDark(this.stroke)) {
+      else if (brightness >= brightnessFactor && this.brightness(this.stroke) >= brightnessFactor) {
         this.stroke = 'rgb(3,3,3)';
         this._change.detectChanges();
       }
     }
   }
 
-  private checkParentColor(element: Element): boolean {
+  private checkParentColor(element: Element): number {
     let color: any = window.getComputedStyle(element, null).getPropertyValue('background-color');
-    return this.isDark(color);
+    return this.brightness(color);
   }
 
-  private isDark(color: any): boolean {
-
+  private brightness(color: any): number {
     let r: number, g: number, b: number, hsp: number;
     if (color.match(/^rgb/)) {
       color = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
@@ -306,18 +310,7 @@ export class AxiomIconComponent implements OnInit, OnDestroy {
       g = color >> 8 & 255;
       b = color & 255;
     }
-    hsp = Math.sqrt(
-      0.299 * (r * r) +
-      0.587 * (g * g) +
-      0.114 * (b * b)
-    );
-    if (hsp > 127.5) {
-      return false;
-    }
-    else {
-      return true;
-    }
-
+    return (r * 299 + g * 587 + b * 114) / 1000;
   }
 
 }
