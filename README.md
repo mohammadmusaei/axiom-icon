@@ -12,7 +12,7 @@
 
 ##### Install component package from npm :
 
-`npm install axiom-icon`
+`npm install ax-icon`
 
 ##### Import component module :
 
