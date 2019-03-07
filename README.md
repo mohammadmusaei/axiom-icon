@@ -2,9 +2,9 @@
 
 ### Online Demo
 
-[Usage Demo](http://app.musaei.me/angular/form/)
+[Usage Demo](http://app.musaei.me/angular/icon/)
 
-### Demo souce is here
+### Demo source is here
 
 [source](https://github.com/mohammadmusaei/axiom-icon/tree/master/src)
 
