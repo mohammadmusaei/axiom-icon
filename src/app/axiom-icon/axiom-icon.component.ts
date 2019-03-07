@@ -2,8 +2,13 @@ import {
   Component,
   OnInit,
   Input,
-  ElementRef
+  ViewEncapsulation,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  OnDestroy,
+  Renderer2
 } from '@angular/core';
+import { AxiomIconConfig } from './axiom-icon-config';
 
 export type AxIcon =
   'arrow-up' |
@@ -229,9 +234,11 @@ export type AxiomIconLinejoin = 'arcs' | 'round' | 'bevel';
 @Component({
   selector: 'ax-icon,[ax-icon]',
   templateUrl: './axiom-icon.component.html',
-  styleUrls: ['./axiom-icon.component.scss']
+  styleUrls: ['./axiom-icon.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
-export class AxiomIconComponent implements OnInit {
+export class AxiomIconComponent implements OnInit, OnDestroy {
 
   @Input('ax-icon') icon: AxIcon;
   @Input() stroke: string = '#000';
@@ -242,10 +249,25 @@ export class AxiomIconComponent implements OnInit {
   @Input() smartColor: boolean = true;
   @Input() parent: Element;
 
-  constructor() { }
+  constructor(config: AxiomIconConfig, private _change: ChangeDetectorRef, private _renderer: Renderer2) {
+    this.stroke = config.stroke;
+    this.linecap = config.linecap;
+    this.linejoin = config.linejoin;
+    this.size = config.size;
+    this.thickness = config.thickness;
+    this.smartColor = config.smartColor;
+    this.parent = config.parent;
+    config.refreshRequest.subscribe(r => {
+      r && this.checkSmartColor();
+    });
+  }
 
   public ngOnInit() {
     this.checkSmartColor();
+  }
+
+  public ngOnDestroy(): void {
+
   }
 
   private checkSmartColor(): void {
@@ -253,12 +275,12 @@ export class AxiomIconComponent implements OnInit {
       let dark: boolean;
       dark = this.checkParentColor(this.parent);
       if (dark && this.isDark(this.stroke)) {
-        this.stroke = '#fff';
+        this.stroke = 'rgb(255,255,255)';
+        this._change.detectChanges();
       }
-      else {
-        if (!this.isDark(this.stroke)) {
-          this.stroke = '#333';
-        }
+      else if (!dark && !this.isDark(this.stroke)) {
+        this.stroke = 'rgb(3,3,3)';
+        this._change.detectChanges();
       }
     }
   }
