@@ -1,27 +1,112 @@
-# AxiomIcon
+# Axiom Icon
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.4.
+### Online Demo
 
-## Development server
+[Usage Demo](http://app.musaei.me/angular/form/)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Demo souce is here
 
-## Code scaffolding
+[source](https://github.com/mohammadmusaei/axiom-icon/tree/master/src)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Installation
 
-## Build
+##### Install component package from npm :
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+`npm install axiom-icon`
 
-## Running unit tests
+##### Import component module :
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```typescript
 
-## Running end-to-end tests
+import { AxIconModule } from 'ax-icon';
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+...
 
-## Further help
+@NgModule({
+  imports: [
+    AxIconModule
+  ], 
+  declarations: [
+    AppComponent
+  ],
+  bootstrap: [AppComponent]
+})
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+...
+
+```
+
+### Usage
+
+Use `[ax-icon]` attribute component for `<i>` tag and assign an icon name to it. 
+
+```html
+
+<i [ax-icon]="download"
+   [stroke]="'#000" 
+   [size]="32" 
+   [linejoin]="'round'"
+   [linecap]="'round'">
+</i>
+
+
+```
+
+### Smart Color
+
+By assigning `[smartColor]` and `[parent]` attributes to `ax-icon`, Component adapt its stroke color with parent background. Therefore when parent background is dark stroke color will be light, and vice-versa.
+
+```html
+
+ <div #parent>
+  
+   <i [ax-icon]="download"
+     [stroke]="'#000" 
+     [smartColor]="true"
+     [parent]="parent"
+     [size]="32" 
+     [linejoin]="'round'"
+     [linecap]="'round'">
+  </i>
+  
+ </div>
+
+```
+
+When parent background change dynamaticaly you can call icons refreshing themselves by `AxiomIconConfig` service.
+
+First import it:
+
+```typescript
+
+  constructor(private _config: AxiomIconConfig) {
+
+  }
+  
+```
+And then use refresh function:
+
+```typescript
+
+  this._config.refresh();
+  
+```
+
+Because `AxiomIconConfig` is a global service, All icons will refresh.
+
+
+### @Input() Params
+
+| Name | Type | Default | Usage |
+| ------ | ------ | ------ | ------ |
+| ax-icon | AxIcon | --- | Icon name |
+| stroke | string | #00000 |  Icon color |
+| size | number | 28 | Icon size in pixel |
+| linejoin | AxiomIconLinejoin | round | `linejoin` is a presentation attribute defining the shape to be used at the corners of paths when they are stroked. Available values are : `arcs`, `round`, `bevel` |
+| linecap | AxiomIconLinecap  | round | `linecap` attribute is a presentation attribute defining the shape to be used at the end of open subpaths when they are stroked. Available values are : `butt`, `round`, `square` |
+| smartColor | boolean  | true | Adaptive stroke color related to parent background |
+| parent | element  | --- | Parent element that will be use for smart color feature |
+
+## License
+
+[MIT](http://opensource.org/licenses/MIT)
