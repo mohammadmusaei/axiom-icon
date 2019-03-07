@@ -18,13 +18,13 @@
 
 ```typescript
 
-import { AxIconModule } from 'ax-icon';
+import { AxiomIconModule } from 'ax-icon';
 
 ...
 
 @NgModule({
   imports: [
-    AxIconModule
+    AxiomIconModule
   ], 
   declarations: [
     AppComponent
