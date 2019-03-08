@@ -54,7 +54,7 @@ Use `[ax-icon]` attribute component for `<i>` tag and assign an icon name to it.
 
 ### Smart Color
 
-By assigning `[smartColor]` and `[parent]` attributes to `ax-icon`, Component adapt its stroke color with parent background. Therefore when parent background is dark stroke color will be light, and vice-versa.
+By assigning `[smartColor]` and `[parent]` attributes to `ax-icon`, Component adapt its stroke color with parent background. Therefore when parent background is dark, stroke color will be light, and vice-versa.
 
 ```html
 
@@ -73,7 +73,7 @@ By assigning `[smartColor]` and `[parent]` attributes to `ax-icon`, Component ad
 
 ```
 
-When parent background change dynamaticaly you can call icons refreshing themselves by `AxiomIconConfig` service.
+When parent background change dynamaticaly, you can call icons refreshing themselves by `AxiomIconConfig` service.
 
 First import it:
 
